@@ -1,0 +1,142 @@
+{% extends './base.html' %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+        
+{% block content %}
+
+<div class="columns is-mobile">
+  <div class="column is-half-tablet is-offset-one-quarter-tablet is-10-mobile is-offset-1-mobile is-half-desktop is-offset-one-quarter-desktop">
+
+    <div class="card">
+    <div class="card-content">
+    <form method="post" enctype="multipart/form-data" action="" role="form">
+      {% csrf_token %}
+    <h3 class="title is-3">プロフィールを編集</h3>
+          <div class="field">
+              <label class="label is-medium">プロフィール画像を変更する</label>
+              <div class="file is-boxed is-primary">
+                {{ adviserform.profile_pic|add_class:"input"}}
+              </div>
+          </div>
+
+          <div class="field">
+            <label class="label is-medium">依頼状態</label>
+            <div class="file is-boxed is-primary">
+              {{ adviserform.is_active|add_class:"input"}}
+            </div>
+          </div>
+
+          <div class="field">
+              <label class="label is-medium">性</label>
+              <div class="control">
+                {{ userform.last_name|add_class:"input" }}
+              </div>
+          </div>
+
+          <div class="field">
+              <label class="label is-medium">名</label>
+              <div class="control">
+                {{ userform.first_name|add_class:"input" }}
+              </div>
+          </div>
+
+          <div class="field">
+            <label class="label is-medium">メールアドレス</label>
+            <div class="control">
+              {{ userform.email|add_class:"input" }}
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label is-medium">性別</label>
+            <div class="control">
+              {{ userform.gender|add_class:"input" }}
+            </div>
+          </div>
+
+
+
+          <div class="field">
+              <label class="label is-medium">プロフィール情報
+              </label>
+              <div class="control">
+                {{ adviserform.profile|add_class:"input textarea" }}
+              </div>
+          </div>
+
+          <div class="field">
+            <label class="label is-medium">身長</label>
+            <div class="control">
+              {{ adviserform.height|add_class:"input" }}
+            </div>
+
+          <div class="field">
+            <label class="label is-medium">インスタグラムのリンク</label>
+            <div class="control">
+              {{ adviserform.instagram|add_class:"input" }}
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label is-medium">WEARのリンク</label>
+            <div class="control">
+              {{ adviserform.wear|add_class:"input" }}
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label is-medium">Tiktokのリンク</label>
+            <div class="control">
+              {{ adviserform.tiktok|add_class:"input" }}
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label is-medium">ツイッターのリンク</label>
+            <div class="control">
+              {{ adviserform.twitter|add_class:"input" }}
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label is-medium">フェイスブックのリンク</label>
+            <div class="control">
+              {{ adviserform.facebook|add_class:"input" }}
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label is-medium">ホームページのリンク</label>
+            <div class="control">
+              {{ adviserform.hp|add_class:"input" }}
+            </div>
+          </div>
+          
+        </div>
+
+      <div class="row">
+        <div class="col s12">
+          <span style="color: red; font-weight: bold;">{{ userform.errors }}</span>
+          <span style="color: red; font-weight: bold;">{{ adviserform.errors }}</span>
+        </div>
+      </div>
+
+
+      <div class="field">
+      <p class="control">
+        <button type="submit" class="button is-success">
+          更新
+        </button>
+      </p>
+    </div>
+
+    </form>
+  </div>
+</div>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "./base.html" %}
+{% load widget_tweaks %}
+
+{% block head %}
+<title>会員登録</title>
+{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-mobile has-text-centered">
+            <div class="column is-half is-offset-one-quarter">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <h3 class="title is-3 is-size-4-mobile">新規会員登録</h3>
+                    <div class="field-body">
+                        <div class="field">
+                            <label class="label">性</label>
+                            {{ form.last_name|add_class:"input"}}
+                        </div>
+
+                        <div class="field">
+                            <label class="label">名</label>
+                            {{ form.first_name|add_class:"input"}}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">ユーザーネーム</label>
+                        {% if form.username.errors %}
+                        {{ form.username|add_class:"input is-danger"}}
+                        <p class="help is-danger">このユーザーネームは使用できません</p>
+                        {% else %}
+                        {{ form.username|add_class:"input"}}
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Eメールアドレス</label>
+                        {% if form.email.errors %}
+                        {{ form.email|add_class:"input is-danger"}}
+                        <p class="help is-danger">このメールアドレスは使用できません</p>
+                        {% else %}
+                        {{ form.email|add_class:"input"}}
+                        {% endif %}
+                    </div>
+                    <div class="field">
+                        <label class="label">パスワード</label>
+                        {{ form.password1|add_class:"input"}}
+                    </div>
+                    <div class="field">
+                        <label class="label">パスワードの確認</label>
+                        {{ form.password2|add_class:"input"}}
+                    </div>
+
+                    <div class="field">
+                        <label class="label">生年月日</label>
+                        {{ form.birth|add_class:"control select"}}
+                    </div>
+
+                    <div class="field">
+                        <label class="label">性別</label>
+                        <div class="control">
+                            <div class="select">
+                                {{ form.gender }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <label class="label">アドバイザーとして登録する（後からでも変更可能です）</label>
+                                {{ form.is_adviser }}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <button type="submit" class="button is-link">登録</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

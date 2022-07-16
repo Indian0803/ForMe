@@ -1,0 +1,37 @@
+{% extends "./base.html" %}
+{% load widget_tweaks %}
+
+{% block head %}
+<title>レビュー</title>
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns is-mobile has-text-centered">
+            <div class="column is-half is-offset-one-quarter">
+                <form method="POST" action="{% url 'review' id %}">
+                    {% csrf_token %}
+                    <h3 class="title is-3">アドバイザーのレビュー</h3>
+
+                    <div class="field">
+                        <label class="label">評価</label>
+                        {{ form.score|add_class:"control select"}}
+                    </div>
+
+                    <div class="field">
+                        <label class="label">コメント（必須ではありません）</label>
+                        {{ form.comment|add_class:"input textarea"}}
+                    </div>
+
+
+                    <div class="control">
+                        <label class="label">（レビューを完了するとアドバイザーとのメッセージの履歴はなくなります）</label>
+                        <button type="submit" class="button is-link">送信</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

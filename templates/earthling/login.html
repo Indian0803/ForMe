@@ -1,0 +1,50 @@
+{% extends "./base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+    <title>ログイン</title>
+{% endblock %}
+{% block content %}
+<section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+            <form method="POST" class="box">
+              {% csrf_token %}
+              <div class="field">
+                <label for="" class="label">Eメールアドレス</label>
+                <div class="control has-icons-left">
+                  {{ form.email|add_class:"input" }}
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="" class="label">パスワード</label>
+                <div class="control has-icons-left">
+                  {{ form.password|add_class:"input" }}
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
+                  </span>
+                </div>
+              </div>
+              {% for error in form.non_field_errors %}
+                <div class="notification is-danger is-light">
+                  {{error}}
+                </div>
+              {% endfor %}
+              <div class="field">
+                <button type="submit" class="button is-success">
+                  ログイン
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

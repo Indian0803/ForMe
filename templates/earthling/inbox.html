@@ -1,0 +1,144 @@
+{% extends './base.html' %}
+
+{% load static %}
+{% block head %}
+  <title>メッセージ</title>
+  <script src="https://kit.fontawesome.com/3ffc2e44a3.js" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <input type="hidden" id="logged-in-user" value="{{ user.id }}">
+{% endif %}
+<div class="columns is-mobile">
+  <div class="column is-one-quarter">
+    <ul style="overflow-y: scroll; height: 500px" class="menu-list">
+      <ui class="contacts">
+        {% for thread in Threads %}
+          <li class=" box {% if forloop.first %}active has-background-warning{% endif %} contact-li" chat-id="chat_{{ thread.id }}" style="cursor: pointer">
+            <article class="media">
+              <div class="media-left">
+                <figure class="image is-64x64">
+                  {% if thread.first_person == user %}
+                    {% if thread.second_person.profile_pic %}
+                      <img src="{{ thread.second_person.profile_pic.url }}">
+                    {% else %}
+                      <img src="images/no-user-image-icon-27.jpg"
+                    {% endif %}
+                  {% else %}
+                    {% if thread.first_person.profile_pic %}
+                      <img src="{{ thread.first_person.profile_pic.url }}">
+                    {% else %}
+                      <img src="images/no-user-image-icon-27.jpg"
+                    {% endif %}
+                  {% endif %}
+                </figure>
+              </div>
+              <div class="media-content">
+                <div class="content">
+                  {% if thread.first_person == user %}
+                    <p><strong>{{ thread.second_person.username }}</strong></p>
+                  {% else %}
+                    <p><strong>{{ thread.first_person.username }}</strong></p>
+                  {% endif %}
+                </div>
+              </div>
+            </article>
+          </li>
+        {% endfor %}
+      </ui>
+    </ul>
+  </div>
+  <div class="column">
+    <div style="overflow-y: scroll; height: 500px"  id="message-box">
+      {% for thread in Threads %}
+          <div class="box messages-wrapper {% if forloop.first %}is_active{% else %}is-hidden{% endif %}" chat-id="chat_{{ thread.id }}" other-user-id="
+          {% if thread.first_person == user %}
+            {{ thread.second_person.id }}
+          {% else %}
+            {{ thread.first_person.id }}
+          {% endif %}
+          ">
+          <div class="card-body msg_card_body">
+            {% for chat in thread.chatmessage_thread.all %}
+              {% if chat.user == user %}
+                <div class="column is-narrow is-two-thirds-mobile is-offset-one-third-mobile is-two-thirds-tablet is-offset-one-third-tablet is-two-third-desktop is-offset-one-third-desktop is-offset-one-third-widescreen is-two-third-widescreen is-two-third-fullhd is-offset-one-third-fullhd">
+                  <p>
+                    <strong><small>{{ chat.timestamp|date:"n/j G:i" }}</small></strong>
+                  </p>
+                  <div class="box has-background-warning">
+                    <div class="media-content">
+                      <div class="content">
+                        {{ chat.message }}
+                        {% if chat.image %}
+                          <img src="{{chat.image}}">
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% else %}
+                <div class="column is-narrow is-two-thirds-mobile is-two-thirds-tablet is-two-thirds-widescreen is-two-thirds-fullhd">
+                  <p>
+                    <strong><small>{{ chat.timestamp|date:"n/j G:i" }}</small></strong>
+                  </p>
+                  <div class="box has-background-grey-lighter">
+                    <div class="media-content">
+                      <div class="content">
+                        {{ chat.message }}
+                        {% if chat.image %}
+                          <img src="{{chat.image}}">
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% if thread.first_person == user %}
+            {% if not thread.first_person.is_adviser%}
+            <a href= "{% url 'review' thread.second_person.id %}" class="button is-success">アドバイスを終了する</a>
+            {% endif %}
+          {% else %}
+            {% if not thread.second_person.is_adviser%}
+            <a href= "{% url 'review' thread.first_person.id %}" class="button is-success">アドバイスを終了する</a>
+            {% endif %}
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="box">
+      <form id="send-message-form">
+        <article class="media input-group">
+          <div class="media-content">
+            <div class="field">
+              <label>
+                <span class="icon is-large">
+                  <i class="fa-solid fa-image fa-xl"></i>
+                </span>
+                <input class="is-hidden" type="file" id="image-input">
+              </label>
+              <p class="control">
+                <textarea type="text" name="" id="input-message" class="form-control textarea" placeholder="メッセージを送る"></textarea>
+              </p>
+            </div>
+            <nav class="level">
+              <div class="level-left">
+                <div class="level-item">
+                  <button type="submit" name="action" class="button is-info">送る</buttom>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </article>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'script/inbox.js' %}"></script>
+{% endblock %}
+

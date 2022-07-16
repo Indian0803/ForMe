@@ -1,0 +1,33 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="columns is-multiline is-mobile">
+    {% for i in advisers %}
+      <a href="{% url 'profile' i.user.id %}">
+        <div class="column">
+          <div class="box">
+            <p class="title is-5">{{i.user.username}}<p>
+            {% if i.profile_pic%}
+              <img class="image is-128x128" src="{{ i.profile_pic.url}}">
+            {% else %}
+              <img class="image is-128x128" src="images/no-user-image-icon-27.jpg">
+            {% endif %}
+            <p>実績：{{i.count }}件</p>
+            {% if i.score %}
+              <p>評価：{{i.score|floatformat}}</p>
+            {% else %}
+              <p>評価：なし</p>
+            {% endif %}
+            {% if i.height %}
+              <p>身長：{{i.height}}</p>
+            {% else %}
+              <p>身長：登録なし</p>
+            {% endif %}
+            <p>性別：{{i.user.gender }}</p>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+{% endblock %}
