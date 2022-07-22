@@ -1,8 +1,16 @@
 {% extends "./base.html" %}
 {% load static %}
 
+{% block head %}
+<title>アドバイザーを探す</title>
+{% endblock %}
+
 {% block content %}
   <div class="columns is-multiline is-mobile">
+    {% comment %} <div class="box has-text-centered" style="width:100%; margin-top:20px;">
+      <p class="subtitle">「マッチングする」を押すと、あなたの骨格タイプやパーソナルカラーをもとに最適なアドバイザーを探すことができます。</p>
+      <a href="{% url 'match' %}" class="button is-success">マッチングする</a>
+    </div> {% endcomment %}
     {% for i in advisers %}
       <a href="{% url 'profile' i.user.id %}">
         <div class="column">
@@ -19,8 +27,8 @@
             {% else %}
               <p>評価：なし</p>
             {% endif %}
-            {% if i.height %}
-              <p>身長：{{i.height}}</p>
+            {% if i.user.height %}
+              <p>身長：{{i.user.height}}</p>
             {% else %}
               <p>身長：登録なし</p>
             {% endif %}

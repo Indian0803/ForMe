@@ -1,0 +1,121 @@
+{% extends './base.html' %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+{% block head %}
+<script src="https://kit.fontawesome.com/3ffc2e44a3.js" crossorigin="anonymous"></script>
+<title>設定</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="columns is-mobile">
+  <div class="column is-half-tablet is-offset-one-quarter-tablet is-10-mobile is-offset-1-mobile is-half-desktop is-offset-one-quarter-desktop">
+
+    <div class="card">
+    <div class="card-content">
+    <form method="post" enctype="multipart/form-data" action="" role="form">
+      {% csrf_token %}
+    	<h3 class="title is-3">設定</h3>
+				<div class="field">
+						<label class="label is-medium">性</label>
+						<div class="control">
+							{{ userform.last_name|add_class:"input" }}
+						</div>
+				</div>
+
+				<div class="field">
+						<label class="label is-medium">名</label>
+						<div class="control">
+							{{ userform.first_name|add_class:"input" }}
+						</div>
+				</div>
+
+				<div class="field">
+					<label class="label is-medium">メールアドレス</label>
+					<div class="control">
+						{{ userform.email|add_class:"input" }}
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label is-medium">性別</label>
+					<div class="control">
+						{{ userform.gender|add_class:"input" }}
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label is-medium">身長</label>
+					<div class="control">
+						{{ userform.height|add_class:"input" }}
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label is-medium">アドバイザーとして登録</label>
+					<div class="control">
+						{{ userform.is_adviser|add_class:"input" }}
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label is-medium">骨格タイプ</label>
+					<span class="icon">
+						<i class="fa-solid fa-arrow-right"></i>
+					</span>
+					<a href= "{% url 'bone_test' %}">骨格タイプがわからない方はこちらから診断を受けてみましょう！</a>
+					<div class="control">
+						{% for checkbox in userform.bone_type %}
+							<div class="">
+								<span>
+									{{ checkbox.tag }}
+									<label class="" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+								</span>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				
+				{% if request.user.gender != "男性" %}
+				<div class="field">
+					<label class="label is-medium">パーソナルカラー</label>
+					<span class="icon">
+						<i class="fa-solid fa-arrow-right"></i>
+					</span>
+					<a href= "{% url 'color_test' %}">パーソナルカラーがわからない方はこちらから診断を受けてみましょう！</a>
+					<div class="control">
+						{% for checkbox in userform.color_type %}
+							<div class="" style="">
+								<span>
+										{{ checkbox.tag }}
+										<label class="" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+								</span>
+
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				{% endif %}
+
+      <div class="row">
+        <div class="col s12">
+          <span style="color: red; font-weight: bold;">{{ userform.errors }}</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <p class="control">
+					<button type="submit" class="button is-success">
+						更新
+					</button>
+				</p>
+    	</div>
+    </form>
+  </div>
+</div>
+  </div>
+</div>
+
+{% endblock %}

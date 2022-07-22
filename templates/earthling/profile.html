@@ -4,6 +4,7 @@
 
 {% block head %}
 <script src="https://kit.fontawesome.com/3ffc2e44a3.js" crossorigin="anonymous"></script>
+<title>プロフィール情報</title>
 {% endblock %}
 {% block content %}
 
@@ -24,6 +25,25 @@
 
       <div class="media-right">
         {% if request.user == adviser.user %}
+          {% if not adviser.user.height or not adviser.profile or not adviser.profile_pic or not adviser.user.bone_type or not adviser.user.color_type %}
+            {% if request.user.gender == '女性' %}
+              <div class="icon-text">
+                <span class="icon has-text-danger">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                </span>
+                <span>プロフィール情報で記入されていない欄があります</span>
+              </div>
+            {% else %}
+              {% if not adviser.user.height or not adviser.profile or not adviser.profile_pic or not adviser.user.bone_type%}
+                <div class="icon-text">
+                  <span class="icon has-text-danger">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                  </span>
+                  <span>プロフィール情報で記入されていない欄があります</span>
+                </div>
+              {% endif %}
+            {% endif %}
+          {% endif %}
           {% if adviser.is_active %}
             <div class="icon-text">
               <span class="icon has-text-success">
@@ -51,8 +71,8 @@
 
       </div>
       性別：{{user.gender}}
-      {% if adviser.height %}
-        身長：{{adviser.height}}
+      {% if adviser.user.height %}
+        身長：{{adviser.user.height}}
       {% endif %}
     </div>
 
@@ -68,7 +88,7 @@
         <div class="level-item has-text-centered">
           <div>
             <p class="heading">評価</p>
-            <p class="title">{{ adviser.score|floatformat }}</p>
+            <p class="title">{{ adviser.score|floatformat }} / 5</p>
           </div>
         </div>
       {% endif %}
@@ -82,6 +102,15 @@
       <h4>プロフィール：</h4>
       <p>{{adviser.profile}}</p>
     {% endif %}
+    {% if adviser.user.bone_type %}
+      <h4>骨格タイプ：</h4>
+      <p>{{adviser.user.bone_type }}</p>
+    {% endif %}
+    {% if adviser.user.color_type %}
+      <h4>パーソナルカラー：</h4>
+      <p>{{adviser.user.color_type }}</p>
+    {% endif %}
+
     {% if adviser.instagram != None %}
       <h4>インスタ：</h4>
       <a href="{{adviser.instagram}}">{{adviser.instagram}}</a>

@@ -14,23 +14,23 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ('email', 'username', 'first_name', 'last_name', 'is_adviser', 'birth', 'gender', 'is_admin')
+    list_display = ('email', 'username', 'first_name', 'last_name', 'is_adviser', 'birth', 'gender', 'height', 'is_admin', 'bone_type', 'color_type')
     list_filter = ('is_admin',)
 
     fieldsets = (
-        (None, {'fields': ('email', 'username', 'first_name', 'last_name', 'is_adviser', 'birth', 'gender')}),
+        (None, {'fields': ('email', 'username', 'first_name', 'last_name', 'is_adviser', 'birth', 'gender', 'height', 'bone_type', 'color_type')}),
         ('Permissions', {'fields': ('is_admin',)})
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'username', 'first_name', 'last_name', 'is_adviser', 'birth', 'gender', 'is_admin')}
+            'fields': ('email', 'password1', 'password2', 'username', 'first_name', 'last_name', 'is_adviser', 'birth', 'gender', 'height', 'is_admin', 'bone_type', 'color_type')}
          ),
     )
 
-    search_fields = ('email', 'username', 'is_adviser', 'first_name', 'last_name', 'birth', 'gender')
-    ordering = ('email', 'username', 'is_adviser', 'first_name', 'last_name', 'birth', 'gender')
+    search_fields = ('email', 'username', 'is_adviser', 'first_name', 'last_name', 'birth', 'gender', 'height', 'bone_type', 'color_type')
+    ordering = ('email', 'username', 'is_adviser', 'first_name', 'last_name', 'birth', 'gender', 'height', 'bone_type', 'color_type')
     filter_horizontal = ()
 
 admin.site.unregister(Group)

@@ -13,48 +13,55 @@
   <input type="hidden" id="logged-in-user" value="{{ user.id }}">
 {% endif %}
 <div class="columns is-mobile">
-  <div class="column is-one-quarter">
-    <ul style="overflow-y: scroll; height: 500px" class="menu-list">
-      <ui class="contacts">
-        {% for thread in Threads %}
-          <li class=" box {% if forloop.first %}active has-background-warning{% endif %} contact-li" chat-id="chat_{{ thread.id }}" style="cursor: pointer">
-            <article class="media">
-              <div class="media-left">
-                <figure class="image is-64x64">
-                  {% if thread.first_person == user %}
-                    {% if thread.second_person.profile_pic %}
-                      <img src="{{ thread.second_person.profile_pic.url }}">
+  <div class="column is-narrow">
+    <div class="button sidemenu">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </div>
+  <div class="contact-list">
+    <div class="column is-full-desktop is-full-mobile">
+      <ul style="overflow-y: scroll; height: 500px" class="menu-list">
+        <ui class="contacts">
+          {% for thread in Threads %}
+            <li class=" box {% if forloop.first %}active has-background-warning{% endif %} contact-li" chat-id="chat_{{ thread.id }}" style="cursor: pointer">
+              <article class="media">
+                <div class="media-left">
+                  <figure class="image is-64x64">
+                    {% if thread.first_person == user %}
+                      {% if thread.second_person.profile_pic %}
+                        <img src="{{ thread.second_person.profile_pic.url }}">
+                      {% else %}
+                        <img src="images/no-user-image-icon-27.jpg"
+                      {% endif %}
                     {% else %}
-                      <img src="images/no-user-image-icon-27.jpg"
+                      {% if thread.first_person.profile_pic %}
+                        <img src="{{ thread.first_person.profile_pic.url }}">
+                      {% else %}
+                        <img src="images/no-user-image-icon-27.jpg"
+                      {% endif %}
                     {% endif %}
-                  {% else %}
-                    {% if thread.first_person.profile_pic %}
-                      <img src="{{ thread.first_person.profile_pic.url }}">
-                    {% else %}
-                      <img src="images/no-user-image-icon-27.jpg"
-                    {% endif %}
-                  {% endif %}
-                </figure>
-              </div>
-              <div class="media-content">
-                <div class="content">
-                  {% if thread.first_person == user %}
-                    <p><strong>{{ thread.second_person.username }}</strong></p>
-                  {% else %}
-                    <p><strong>{{ thread.first_person.username }}</strong></p>
-                  {% endif %}
+                  </figure>
                 </div>
-              </div>
-            </article>
-          </li>
-        {% endfor %}
-      </ui>
-    </ul>
+                <div class="media-content">
+                  <div class="content">
+                    {% if thread.first_person == user %}
+                      <p><strong>{{ thread.second_person.username }}</strong></p>
+                    {% else %}
+                      <p><strong>{{ thread.first_person.username }}</strong></p>
+                    {% endif %}
+                  </div>
+                </div>
+              </article>
+            </li>
+          {% endfor %}
+        </ui>
+      </ul>
+    </div>
   </div>
   <div class="column">
     <div style="overflow-y: scroll; height: 500px"  id="message-box">
       {% for thread in Threads %}
-          <div class="box messages-wrapper {% if forloop.first %}is_active{% else %}is-hidden{% endif %}" chat-id="chat_{{ thread.id }}" other-user-id="
+        <div class="box messages-wrapper {% if forloop.first %}is_active{% else %}is-hidden{% endif %}" chat-id="chat_{{ thread.id }}" other-user-id="
           {% if thread.first_person == user %}
             {{ thread.second_person.id }}
           {% else %}
@@ -99,13 +106,7 @@
             {% endfor %}
           </div>
           {% if thread.first_person == user %}
-            {% if not thread.first_person.is_adviser%}
             <a href= "{% url 'review' thread.second_person.id %}" class="button is-success">アドバイスを終了する</a>
-            {% endif %}
-          {% else %}
-            {% if not thread.second_person.is_adviser%}
-            <a href= "{% url 'review' thread.first_person.id %}" class="button is-success">アドバイスを終了する</a>
-            {% endif %}
           {% endif %}
         </div>
       {% endfor %}

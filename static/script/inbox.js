@@ -15,7 +15,6 @@ let imageBase64 = ""; // Base64形式に変換した画像を代入する変数
 
 const imageInput = document.getElementById("image-input");
 
-
 imageInput.addEventListener('change', (e) => {
   // 画像ファイルを取得し、画像データ(URL)を変数に代入
   const imageFile = e.target.files[0];
@@ -133,7 +132,6 @@ function newMessage(message, sent_by_id, thread_id, time, image) {
   var objDiv = document.getElementById("message-box");
   objDiv.scrollTop = objDiv.scrollHeight;
   input_message.val(null);
-  imageBase64.val(null);
 }
 
 
@@ -145,6 +143,20 @@ $('.contact-li').on('click', function () {
   let chat_id = $(this).attr('chat-id')
   $('.messages-wrapper.is_active').removeClass('is_active').addClass('is-hidden')
   $('.messages-wrapper[chat-id="' + chat_id + '"]').addClass('is_active').removeClass('is-hidden')
+})
+
+
+var check = true
+
+$('.sidemenu').on('click', function () {
+  if (check) {
+    $('.contact-list').addClass('is-hidden')
+    check = false
+  }
+  else {
+    $('.contact-list.is-hidden').removeClass('is-hidden')
+    check = true
+  }
 })
 
 function get_active_other_user_id() {

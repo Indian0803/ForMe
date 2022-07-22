@@ -1,8 +1,23 @@
 {% extends "./base.html" %}
+{% load static %}
 
 {% block head %}
-    <title>ReMe リミー</title>
+    <title>ForMe フォーミー</title>
 {% endblock %}
 
 {% block content %}
+  <section class="hero is-info is-fullheight" style="background-image:url({% static 'images/messageImage_1658064993615.jpeg'%}); background-size:cover; background-position: center;">
+		<div class="hero-body">
+			<div class="container has-text-centered" style="background-color:white; opacity:80%; width:100%;">
+				<p class="title" style="color:black; font-weight: bold; font-size:60px;">
+					<img src="{% static 'images/logo.jpg' %}" width="60px" height="60px">
+					ForMe
+				</p>
+				<p class="subtitle" style="color:black; font-size:25px;">
+					ファッション初心者のためのファッションコーディネーターマッチングサービス
+				</p>
+			</div>
+		</div>
+	</section>
+	<
 {% endblock %}

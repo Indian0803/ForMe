@@ -1,0 +1,22 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block head %}
+<title>マッチング</title>
+{% endblock %}
+
+{% block content %}
+{% if not tf %}
+	<div class="has-text-centered">
+		<p class="h1"><strong>的確なアドバイザーを探すため、まずは骨格タイプや身長などを入力しましょう！</strong></h1>
+		{% if request.user.is_adviser %}
+			<a href="{% url 'profile_edit' %}" class="button is-success">情報を入力する</a>
+		{% else %}
+			<a href="{% url 'settings' %}" class="button is-success">情報を入力する</a>
+		{% endif %}
+	</div>
+{% else %}
+
+{% endif %}
+
+{% endblock %}

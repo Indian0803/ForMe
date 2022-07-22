@@ -1,0 +1,47 @@
+{% extends "./base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+<title>診断結果</title>
+{% endblock %}
+
+{% block content %}
+<div class="has-text-centered">
+    <p class="h1" style="margin-top:50px;"><strong>
+        {% if bool == 1 %}
+            あなたの骨格タイプは
+            {% for type in request.user.bone_type %}
+                {% if multiple %}
+                    {% if forloop.first %}
+                        {{type}}と
+                    {% else %}
+                        {{ type }}
+                    {% endif %}
+                {% else %}
+                    {{type}}
+                {% endif %}
+            です！
+            {% endfor %}
+        {% else %}
+            あなたのパーソナルカラーは
+            {% for type in request.user.color_type %}
+                {% if multiple %}
+                    {% if forloop.first %}
+                        {{type}}と
+                    {% else %}
+                        {{ type }}
+                    {% endif %}
+                {% else %}
+                    {{type}}
+                {% endif %}
+            {% endfor %}
+            です！
+        {% endif %}
+            
+    </strong></h1>
+    <div style="margin-top:100px;">  
+        <a class = "button is-success" href="{% url 'adviser_list' %}">アドバイザーを探しに行く</a>
+    </div>
+</div>
+{% endblock %}

@@ -3,9 +3,6 @@ from channels.consumer import AsyncConsumer
 from channels.db import database_sync_to_async
 import datetime
 from django.contrib.auth import get_user_model
-import base64
-import numpy as np
-import cv2
 
 from earthling.models import Thread, ChatMessage
 
