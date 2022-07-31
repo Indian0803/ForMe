@@ -31,7 +31,6 @@ class ChatConsumer(AsyncConsumer):
         send_to_id = received_data.get('send_to')
         thread_id = received_data.get('thread_id')
         image = received_data.get('image')
-
         if not msg and not image:
             print('Error:: empty message')
             return False

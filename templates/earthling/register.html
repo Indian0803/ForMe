@@ -25,7 +25,7 @@
                             {{ form.first_name|add_class:"input"}}
                         </div>
                     </div>
-
+                    <hr>
                     <div class="field">
                         <label class="label">ユーザーネーム</label>
                         {% if form.username.errors %}
@@ -35,7 +35,7 @@
                         {{ form.username|add_class:"input"}}
                         {% endif %}
                     </div>
-
+                    <hr>
                     <div class="field">
                         <label class="label">Eメールアドレス</label>
                         {% if form.email.errors %}
@@ -45,6 +45,7 @@
                         {{ form.email|add_class:"input"}}
                         {% endif %}
                     </div>
+                    <hr>
                     <div class="field">
                         <label class="label">パスワード</label>
                         {{ form.password1|add_class:"input"}}
@@ -54,10 +55,12 @@
                         {{ form.password2|add_class:"input"}}
                     </div>
 
+                    <hr>
                     <div class="field">
                         <label class="label">生年月日</label>
                         {{ form.birth|add_class:"control select"}}
                     </div>
+                    <hr>
 
                     <div class="field">
                         <label class="label">性別</label>
@@ -67,6 +70,7 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
 
                     <div class="field">
                         <div class="control">
@@ -76,6 +80,7 @@
                             </label>
                         </div>
                     </div>
+                    
 
                     <div class="control">
                         <button type="submit" class="button is-link">登録</button>

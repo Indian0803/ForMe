@@ -3,6 +3,9 @@
 
 {% block head %}
     <title>ForMe フォーミー</title>
+		<script src="https://kit.fontawesome.com/3ffc2e44a3.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type='text/css' href="{% static 'css/home.css' %}">
+
 {% endblock %}
 
 {% block content %}
@@ -19,5 +22,77 @@
 			</div>
 		</div>
 	</section>
-	<
+	<hr>
+	<div class="container has-text-centered">
+		<p class="subtitle" style="color:black; font-weight: bold; font-size:20px;">
+		ちょっとオシャレな一般人が、あなたの体に合ったコーデやオシャレのコツをアドバイス！
+		</p>
+		<p class="subtitle" style="color:black; font-weight: bold; font-size:20px;">
+			短い診断を受けるだけで簡単にマッチングができます！
+		</p>
+	</div>
+	<hr>
+	<div class="has-text-centered" style="margin-top:30px;">
+		<h1 class="title">使い方</h1>
+	</div>
+	<div class="columns is-mobile" style="margin-top:30px;">
+		<div class="column is-half has-text-centered">
+			<div class="box has-background-grey-light">
+				<h1 class="subtitle">
+					<strong>依頼ユーザー</strong>
+				</h1>
+			</div>
+			<div class="column is-three-fifths is-offset-one-fifth has-text-centered">
+				<div class="box has-background-grey-light">
+					<p><strong>会員登録</strong></p>
+				</div>
+				<div class="box has-background-grey-light">
+					<strong>情報入力</strong>
+					<hr>
+					<p>マッチングの際に使われる骨格タイプや身長などの情報を入力</p>
+					<p>（骨格タイプ診断とパーソナルカラー診断もサイト上にあるので、初心者でも安心！）</p>
+				</div>
+
+				<div class="box has-background-grey-light">
+					<strong>マッチング</strong>
+					<hr>
+					<p>自分の骨格タイプや身長などが似ているアドバイザーとマッチング！気に入ったらアドバイスを依頼しましょう！</p>
+				</div>
+				<div class="box has-background-grey-light">
+					<strong>支払い</strong>
+					<hr>
+					<p>（現在はベータ版なので支払いは発生しません）</p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="timeline_axis">
+		</div>
+		<div class="column is-half has-text-centered">
+			
+			<div class="box">
+				<h1 class="subtitle">
+					<strong>アドバイザー</strong>
+				</h1>
+			</div>
+			<div class="column is-three-fifths is-offset-one-fifth has-text-centered">
+
+				<div class="box">
+					<strong>会員登録</strong>
+				</div>
+
+				<div class="box">
+					<strong>プロフィール編集</strong>
+					<hr>
+					<p>マッチングの際に使われる骨格タイプや身長などの情報を入力</p>
+				</div>
+
+				<div class="box" style="margin-top:560px;">
+					<strong>アドバイス</strong>
+					<hr>
+					<p>依頼ユーザーの情報をもとにアドバイスやコーデの提案を行いましょう！</p>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

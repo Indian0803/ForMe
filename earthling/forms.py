@@ -348,6 +348,14 @@ class ColorTest(forms.Form):
     )
     twelve = forms.ChoiceField(choices=TWELVE, label='体型は？')
 
-class match(forms.Form):
-    height = forms.IntegerField()
-    
+class new_conv(forms.Form):
+    body = forms.CharField(required=False, widget=forms.Textarea)
+    CHOICES = (
+        ('お任せコーデ提案', 'お任せコーデ提案'),
+        ('自分の持っている服の着合わせアドバイス', '自分の持っている服の着合わせアドバイス'),
+        ('服選びのコツ伝授', '服選びのコツ伝授'),
+        ('その他', 'その他')
+    )
+    order = forms.MultipleChoiceField(choices=CHOICES, required=True, widget=forms.CheckboxSelectMultiple)
+    other = forms.CharField(required=False)
+    price = forms.CharField(required=False)

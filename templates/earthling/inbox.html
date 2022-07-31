@@ -78,7 +78,7 @@
                   <div class="box has-background-warning">
                     <div class="media-content">
                       <div class="content">
-                        {{ chat.message }}
+                        {{ chat.message |safe}}
                         {% if chat.image %}
                           <img src="{{chat.image}}">
                         {% endif %}
@@ -94,7 +94,7 @@
                   <div class="box has-background-grey-lighter">
                     <div class="media-content">
                       <div class="content">
-                        {{ chat.message }}
+                        {{ chat.message |safe }}
                         {% if chat.image %}
                           <img src="{{chat.image}}">
                         {% endif %}

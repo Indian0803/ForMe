@@ -8,7 +8,7 @@
 {% block content %}
 {% if not tf %}
 	<div class="has-text-centered">
-		<p class="h1"><strong>的確なアドバイザーを探すため、まずは骨格タイプや身長などを入力しましょう！</strong></h1>
+		<p class="h1"><strong>適切なアドバイザーを探すため、まずは骨格タイプや身長などを入力しましょう！</strong></h1>
 		{% if request.user.is_adviser %}
 			<a href="{% url 'profile_edit' %}" class="button is-success">情報を入力する</a>
 		{% else %}
@@ -16,7 +16,51 @@
 		{% endif %}
 	</div>
 {% else %}
-
+	{% if advisers %}
+	<div class="columns is-multiline is-mobile">
+		<div class="content has-text-centered" style="width:100%; margin-top:20px;">
+			<article class="message is-primary">
+				<div class="message-body">
+					あなたのタイプにあったアドバイザーが見つかりました！
+				</div>
+			</article>
+		</div> 
+		{% for i in advisers %}
+		  <a href="{% url 'profile' i.id %}">
+			<div class="column">
+			  <div class="box">
+				<p class="title is-5">{{i.username}}<p>
+				{% if i.adviser.profile_pic%}
+				  <img class="image is-128x128" src="{{ i.adviser.profile_pic.url}}">
+				{% else %}
+				  <img class="image is-128x128" src="images/no-user-image-icon-27.jpg">
+				{% endif %}
+				<p>実績：{{i.adviser.count }}件</p>
+				{% if i.adviser.score %}
+				  <p>評価：{{i.adviser.score|floatformat}}</p>
+				{% else %}
+				  <p>評価：なし</p>
+				{% endif %}
+				{% if i.height %}
+				  <p>身長：{{i.height}}</p>
+				{% else %}
+				  <p>身長：登録なし</p>
+				{% endif %}
+				<p>性別：{{i.gender }}</p>
+			  </div>
+			</div>
+		  </a>
+		{% endfor %}
+	  </div>
+	{% else %}
+	<div class="content has-text-centered" style="width:100%; margin-top:20px;">
+		<article class="message is-danger">
+			<div class="message-body">
+				あなたのタイプにあったアドバイザーが見つかりませんでした...
+			</div>
+		</article>
+	</div> 
+	{% endif %}
 {% endif %}
 
 {% endblock %}

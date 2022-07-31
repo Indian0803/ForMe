@@ -1,0 +1,54 @@
+{% extends "./base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block head %}
+<title>アドバイス依頼</title>
+{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-mobile has-text-centered">
+            <div class="column is-half is-offset-one-quarter">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <h3 class="title is-3 is-size-4-mobile">アドバイスの依頼</h3>
+                    <hr>
+										
+										{% if message %}
+											<article class="message is-danger">
+												<div class="message-body">
+													{{message}}
+												</div>
+											</article>
+										{% endif %}
+                    <div class="field">
+											<label class="label">依頼内容</label>
+												{{form.order}}
+                    </div>
+										
+                    <div class="field">
+                        <label class="label">（依頼内容でその他を選択した場合は内容を記入してください）</label>
+                        {{form.other|add_class:"input"}}
+                    </div>
+
+                    <div class="field">
+                        <label class="label">予算（お任せコーデ提案を選択した場合）</label>
+                        {{ form.price|add_class:"input"}}
+                    </div>
+										<hr>
+                    <div class="field">
+                        <label class="label">その他メッセージ（依頼の詳しい内容など）</label>
+                        {{ form.body|add_class:"input"}}
+                    </div>
+                    <div class="control">
+                        <button type="submit" class="button is-link">依頼</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
